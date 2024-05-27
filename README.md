@@ -2,10 +2,7 @@
 
 ## 사용 스택
 
-<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white">
-<img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white">
-<img src="https://img.shields.io/badge/emotion-hotpink?style=for-the-badge&logo=emotion&logoColor=white">
-<img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"> <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white"> <img src="https://img.shields.io/badge/emotion-hotpink?style=for-the-badge&logo=emotion&logoColor=white"> <img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white">
 
 ## 개인 목표
 
@@ -15,10 +12,11 @@ Vitest를 이용하여 TDD기반으로 supabase를 설계하여 속도보다 코
 
 ## 폴더 구조
 
+```
 📦supabase
 ┣ 📂src
 ┃ ┣ 📂assets
-┃ ┣ 📂components  
+┃ ┣ 📂components
 ┃ ┃ ┗ 📂Greet
 ┃ ┣ 📂pages
 ┃ ┃ ┗ 📂Home
@@ -27,18 +25,19 @@ Vitest를 이용하여 TDD기반으로 supabase를 설계하여 속도보다 코
 ┃ ┣ 📜App.tsx
 ┃ ┣ 📜index.css
 ┃ ┣ 📜main.tsx
-┃ ┣ 📜Router.tsx createBrowserRouter 분리
+┃ ┣ 📜Router.tsx        createBrowserRouter 분리
 ┃ ┗ 📜vite-env.d.ts
 ┣ 📂tests
-┃ ┣ 📂components vitest
-┃ ┗ 📜setup.ts vitest setup 추가
+┃ ┣ 📂components        vitest
+┃ ┗ 📜setup.ts          vitest setup 추가
 ┣ 📜.eslintrc.cjs
 ┣ 📜.gitignore
 ┣ 📜index.html
 ┣ 📜package-lock.json
 ┣ 📜package.json
 ┣ 📜README.md
-┣ 📜tsconfig.json emotion 세팅 추가
+┣ 📜tsconfig.json       emotion 세팅 추가
 ┣ 📜tsconfig.node.json
-┣ 📜vite.config.ts emotion 세팅 추가
-┗ 📜vitest.config.ts vitest 세팅
+┣ 📜vite.config.ts      emotion 세팅 추가
+┗ 📜vitest.config.ts    vitest 세팅
+```
