@@ -18,8 +18,6 @@ const Idols = () => {
     console.timeEnd('fetch 타임 측정');
   }
 
-  console.log(idolList);
-
   return (
     <div>
       <h1>Idols</h1>
