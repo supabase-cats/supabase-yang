@@ -3,6 +3,7 @@ import { supabase } from '../../supabaseClient';
 import { Database } from '../../types/supabase';
 import { sessionAtom } from '../../stores/AuthStore';
 import { useAtomValue } from 'jotai';
+import styles from './style';
 
 const Idols = () => {
   const session = useAtomValue(sessionAtom);
@@ -26,7 +27,16 @@ const Idols = () => {
       {session ? (
         <ul>
           {idolList?.map((idol) => {
-            return <li key={idol.id}>{idol.name}</li>;
+            return (
+              <li key={idol.id}>
+                <p>{idol.name}</p>
+                <img
+                  src={idol.profilePicture}
+                  alt={`${idol.name} picture`}
+                  css={styles.idolpicture}
+                />
+              </li>
+            );
           })}
         </ul>
       ) : (
