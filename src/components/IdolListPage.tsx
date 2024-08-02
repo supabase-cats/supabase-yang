@@ -6,7 +6,7 @@ import AddIdolModal from './AddIdolModal';
 import { useState } from 'react';
 
 interface Idol {
-  id: number;
+  id: string;
   group: string;
   name: string;
   gender: string;
@@ -15,7 +15,7 @@ interface Idol {
 
 const IdolListPage = () => {
   const [page, setPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 5;
 
   const fetchIdol = async () => {
     const { data, error } = await supabase
@@ -46,7 +46,7 @@ const IdolListPage = () => {
 
   return (
     <>
-      <Flex justify="center" mb="4">
+      <Flex justify="center" mb="4" gap="3">
         <Button onClick={() => supabase.auth.signOut()}>Sign Out</Button>
         <AddIdolModal />
       </Flex>
@@ -55,6 +55,7 @@ const IdolListPage = () => {
           idol.map((idol: Idol) => (
             <IdolList
               key={idol.id}
+              id={idol.id}
               group={idol.group}
               name={idol.name}
               gender={idol.gender}
