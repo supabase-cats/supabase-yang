@@ -55,7 +55,6 @@ const IdolListPage = () => {
           idol.map((idol: Idol) => (
             <IdolList
               key={idol.id}
-              id={idol.id}
               group={idol.group}
               name={idol.name}
               gender={idol.gender}

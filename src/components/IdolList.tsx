@@ -9,6 +9,7 @@ import {
 } from '@radix-ui/themes';
 import { supabase } from '../supabaseClient';
 import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const IdolList = ({
   group,
@@ -28,11 +29,43 @@ const IdolList = ({
     gender,
   });
 
-  const handleDelete = async () => {
-    const { error } = await supabase.from('IdolList').delete().eq('name', name);
-    if (error) {
+  const queryClient = useQueryClient();
+
+  const updateMutation = useMutation({
+    mutationFn: async (updatedInfo: typeof idolUpdateInfo) => {
+      const { error } = await supabase
+        .from('IdolList')
+        .update(updatedInfo)
+        .eq('name', name);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['idol'] });
+      setIsEditing(false);
+    },
+    onError: (error) => {
+      console.error('아이돌 수정 중 오류 발생:', error);
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase
+        .from('IdolList')
+        .delete()
+        .eq('name', name);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['idol'] });
+    },
+    onError: (error) => {
       console.error('아이돌 삭제 중 오류 발생:', error);
-    }
+    },
+  });
+
+  const handleDelete = async () => {
+    deleteMutation.mutate();
   };
 
   const handleUpdate = () => {
@@ -49,14 +82,7 @@ const IdolList = ({
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      setIsEditing(false);
-      const { error } = await supabase
-        .from('IdolList')
-        .update(idolUpdateInfo)
-        .eq('name', name);
-      if (error) {
-        console.error('아이돌 수정 중 오류 발생:', error);
-      }
+      updateMutation.mutate(idolUpdateInfo);
     }
   };
 
@@ -73,6 +99,7 @@ const IdolList = ({
                   value={idolUpdateInfo.group}
                   onChange={handleChange}
                   onKeyDown={handleKeyDown}
+                  name="group"
                 />
               ) : (
                 <Code variant="ghost">{group}</Code>
@@ -95,6 +122,7 @@ const IdolList = ({
                 value={idolUpdateInfo.name}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
+                name="name"
               />
             ) : (
               name
@@ -110,6 +138,7 @@ const IdolList = ({
                 value={idolUpdateInfo.gender}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
+                name="gender"
               />
             ) : (
               <Link href="mailto:vlad@workos.com">{gender}</Link>
